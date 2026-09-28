@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>Privacy — Offer Torch / Flashlight</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .privacy { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; }
+    .privacy h1 { font-size: 1.35rem; margin: 0 0 8px; }
+    .privacy h2 { font-size: 1.05rem; color: var(--accent); margin: 22px 0 8px; }
+    .privacy p, .privacy li { color: var(--text); line-height: 1.55; font-size: 0.95rem; }
+    .privacy a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="privacy">
+    <p><a href="index.html">← Back to app</a></p>
+    <h1>Privacy Policy</h1>
+    <p class="muted">Offer Torch / Flashlight · com.offerpk.flashlight · Local document (v1.0.0-complete)</p>
+
+    <h2>Summary</h2>
+    <p>
+      This app is designed to work <strong>offline</strong>. It does not require an account.
+      Core flashlight / screen-light features do not send your personal data to OfferPk servers.
+    </p>
+
+    <h2>Permissions explained</h2>
+    <ul>
+      <li>
+        <strong>Camera / flashlight (optional):</strong> Used only to control the rear LED torch via
+        Android <code>CameraManager.setTorchMode</code> (and strength APIs on Android 13+).
+        We prefer torch control <em>without</em> opening a camera capture preview.
+        Declared with <code>android.hardware.camera</code> / <code>android.hardware.camera.flash</code>
+        as <code>required="false"</code> so the app still installs on devices without a flash
+        (Screen Light remains available).
+      </li>
+      <li><strong>Not used:</strong> location, microphone, storage/photos library, contacts, phone.</li>
+    </ul>
+
+    <h2>Data stored on device</h2>
+    <p>
+      Settings (theme, strobe speed, default-on, ad unlock stubs, epilepsy acknowledgement) are stored
+      in on-device <code>localStorage</code> / app preferences. They stay on your device unless you clear app data.
+    </p>
+
+    <h2>Ads (stub / optional)</h2>
+    <p>
+      Banner placeholders appear only on Settings and Themes — never delaying Torch ON.
+      Rewarded stubs can unlock extra screen-light colors or a one-time remove-ads preference.
+      When real AdMob (or similar) is wired, that SDK’s privacy disclosures and consent flows apply;
+      this local policy will be updated accordingly before Play production with live ads.
+    </p>
+
+    <h2>Children</h2>
+    <p>Not directed at children under 13. Strobe includes a photosensitive epilepsy warning.</p>
+
+    <h2>Contact</h2>
+    <p>OfferPk / Mia Smith — use the store listing contact for privacy questions.</p>
+    <p class="muted">Last updated: 2026-09-28</p>
+  </div>
+</body>
+</html>

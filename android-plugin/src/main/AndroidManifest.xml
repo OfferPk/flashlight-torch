@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merge into app manifest. Camera/flash optional. NO location/mic/storage/contacts. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Some OEMs require CAMERA to toggle torch; keep if setTorchMode fails without it. -->
+    <uses-permission android:name="android.permission.CAMERA" android:required="false" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+    <!-- Do NOT declare: ACCESS_FINE_LOCATION, RECORD_AUDIO, READ_EXTERNAL_STORAGE, READ_CONTACTS -->
+</manifest>

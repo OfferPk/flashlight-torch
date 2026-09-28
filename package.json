@@ -1,0 +1,39 @@
+{
+  "name": "offer-flashlight-torch",
+  "version": "1.0.0-complete",
+  "description": "Offer Torch / Flashlight — offline LED torch + screen light PWA + Capacitor (strobe/SOS, themes, wake lock)",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve -l 4181 .",
+    "serve": "npx --yes serve -l 4181 .",
+    "start:py": "python3 -m http.server 4181",
+    "build:web": "node scripts/build-web.js",
+    "pack:windows": "node scripts/build-web.js",
+    "smoke": "node scripts/smoke.js",
+    "test": "node scripts/smoke.js",
+    "check": "node --check js/storage.js && node --check js/ads.js && node --check js/wake.js && node --check js/torch.js && node --check js/screenlight.js && node --check js/strobe.js && node --check js/app.js && node --check sw.js && node --check scripts/build-web.js && node --check scripts/smoke.js",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npm run build:web && npx cap sync android",
+    "cap:open": "npx cap open android",
+    "android:build": "npm run cap:sync && cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  },
+  "keywords": [
+    "flashlight",
+    "torch",
+    "strobe",
+    "sos",
+    "screen-light",
+    "pwa",
+    "offline",
+    "capacitor"
+  ],
+  "author": "OfferPk / Mia Smith",
+  "license": "MIT"
+}

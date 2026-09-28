@@ -1,0 +1,16 @@
+{
+  "appId": "com.offerpk.flashlight",
+  "appName": "Offer Torch / Flashlight",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "Torch": {
+      "preferNoCapture": true
+    }
+  }
+}
