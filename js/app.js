@@ -137,7 +137,9 @@
 
   function highlightColorSwatches(color) {
     qsa('.color-swatch').forEach(function (s) {
-      s.classList.toggle('selected', s.getAttribute('data-color').toLowerCase() === color.toLowerCase());
+      var selected = s.getAttribute('data-color').toLowerCase() === color.toLowerCase();
+      s.classList.toggle('selected', selected);
+      s.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
   }
 
@@ -179,6 +181,7 @@
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'theme-card' + (settings.themeId === t.id ? ' selected' : '');
+        b.setAttribute('aria-pressed', settings.themeId === t.id ? 'true' : 'false');
         b.innerHTML = '<span class="theme-dot" style="background:' + t.accent + '"></span><span>' + t.name + '</span>';
         b.addEventListener('click', function () {
           settings.themeId = t.id;
@@ -203,6 +206,8 @@
     b.type = 'button';
     b.className = 'color-swatch' + (locked ? ' locked' : '');
     b.setAttribute('data-color', hex);
+    b.setAttribute('aria-label', (label || hex) + (locked ? ' (locked; watch reward to unlock)' : ''));
+    b.setAttribute('aria-pressed', 'false');
     b.style.setProperty('--swatch', hex);
     b.title = (label || hex) + (locked ? ' (unlock)' : '');
     b.innerHTML = locked ? '<span class="lock">🔒</span>' : '';

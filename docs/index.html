@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0f14" />
+  <meta name="theme-color" content="#081018" />
   <meta name="description" content="Offer Torch / Flashlight — offline LED torch, screen light, strobe/SOS. Privacy-friendly." />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,22 +16,39 @@
 </head>
 <body>
   <header class="app-header">
-    <h1>Offer Torch</h1>
-    <span class="badge">v1.0.0-complete</span>
+    <div class="brand-lockup">
+      <img class="brand-mark" src="icons/icon.svg" alt="" />
+      <div class="brand-copy">
+        <h1>Offer Torch</h1>
+        <span>LIGHT WHEN YOU NEED IT</span>
+      </div>
+    </div>
+    <span class="badge"><span class="ready-dot" aria-hidden="true"></span>Offline ready</span>
   </header>
 
-  <main>
+  <main id="app-content">
     <!-- TORCH -->
-    <section class="tab-panel" data-tab="torch">
-      <div class="card">
-        <h2>Torch</h2>
+    <section class="tab-panel" id="panel-torch" data-tab="torch" role="tabpanel" aria-labelledby="tab-torch">
+      <div class="page-heading">
+        <p class="eyebrow">INSTANT LIGHT</p>
+        <h2>Your light, ready.</h2>
+        <p>Choose a light for wherever you are.</p>
+      </div>
+      <div class="card torch-card">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">REAR LED</p>
+            <h3>Torch</h3>
+          </div>
+          <span class="section-tag">QUICK CONTROL</span>
+        </div>
         <button type="button" id="torch-toggle" class="torch-btn" aria-pressed="false">
           <span class="icon" aria-hidden="true">🔦</span>
           <span class="torch-label">OFF</span>
         </button>
-        <p class="status-line" id="torch-status">Torch is OFF</p>
+        <p class="status-line" id="torch-status" role="status" aria-live="polite">Torch is OFF</p>
         <div id="strength-wrap" class="slider-row">
-          <label>
+          <label for="strength-slider">
             <span>Brightness / strength</span>
             <span id="strength-val">100%</span>
           </label>
@@ -43,19 +60,30 @@
         </div>
         <p class="note" id="torch-note" hidden></p>
       </div>
-      <p class="muted">Torch ON is never delayed for ads. Keep-awake while on.</p>
+      <p class="support-line"><span class="support-icon" aria-hidden="true">✦</span> No ads on the torch screen <span class="support-divider">·</span> Keeps awake while lit</p>
     </section>
 
     <!-- STROBE / SOS -->
-    <section class="tab-panel" data-tab="strobe" hidden>
+    <section class="tab-panel" id="panel-strobe" data-tab="strobe" role="tabpanel" aria-labelledby="tab-strobe" hidden>
+      <div class="page-heading">
+        <p class="eyebrow">EMERGENCY MODES</p>
+        <h2>Strobe &amp; SOS</h2>
+        <p>Use flashing modes carefully and only when needed.</p>
+      </div>
       <div class="card">
-        <h2>Strobe / SOS</h2>
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">SIGNAL LIGHT</p>
+            <h3>Choose a pattern</h3>
+          </div>
+          <span class="section-tag">1–10 HZ</span>
+        </div>
         <div class="warn-box">
           <strong>Photosensitive epilepsy warning:</strong> Flashing lights can trigger seizures.
           A confirmation is required before enabling strobe or SOS. Max frequency capped (~10 Hz).
         </div>
         <div class="slider-row">
-          <label>
+          <label for="strobe-hz">
             <span>Strobe speed</span>
             <span id="strobe-hz-val">4 Hz (max 10)</span>
           </label>
@@ -68,52 +96,84 @@
         <div class="row-btns">
           <button type="button" class="btn danger" id="strobe-stop-all">Stop all lights</button>
         </div>
-        <p class="muted" style="margin-top:12px">
-          SOS uses Morse ··· ——— ··· . On web (no LED), strobe/SOS drives Screen Light automatically.
+        <p class="muted helper-copy">
+          SOS uses Morse ··· ——— ···. On web (no LED), strobe/SOS drives Screen Light automatically.
         </p>
       </div>
     </section>
 
     <!-- SCREEN LIGHT -->
-    <section class="tab-panel" data-tab="screen" hidden>
-      <div class="card">
-        <h2>Screen Light</h2>
-        <p class="muted">Primary mode on web / devices without rear flash. Uses Screen Wake Lock + CSS max brightness.</p>
+    <section class="tab-panel" id="panel-screen" data-tab="screen" role="tabpanel" aria-labelledby="tab-screen" hidden>
+      <div class="page-heading">
+        <p class="eyebrow">DISPLAY LIGHT</p>
+        <h2>Light from your screen.</h2>
+        <p>A soft, adjustable glow—right on your display.</p>
+      </div>
+      <div class="card screen-card">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">WORKS ON THE WEB</p>
+            <h3>Screen Light</h3>
+          </div>
+          <span class="section-tag">WAKE LOCK</span>
+        </div>
+        <p class="muted intro-copy">Primary mode on web and devices without a rear flash. Keeps your display awake while the light is on.</p>
         <button type="button" id="screen-toggle" class="screen-btn" aria-pressed="false">
           <span class="icon" aria-hidden="true">💡</span>
           <span class="screen-label">OFF</span>
         </button>
-        <div class="color-quick">
+        <div class="color-quick" aria-label="Quick light colors">
           <button type="button" class="btn" id="btn-white">White</button>
           <button type="button" class="btn danger" id="btn-red">Red</button>
         </div>
         <div class="slider-row">
-          <label>
+          <label for="screen-brightness">
             <span>Screen brightness</span>
             <span id="screen-brightness-val">100%</span>
           </label>
           <input id="screen-brightness" type="range" min="20" max="100" value="100" step="1" aria-label="Screen brightness" />
         </div>
-        <p class="muted" style="margin-top:10px">More colors: Themes tab (rewarded unlock stub).</p>
+        <p class="muted helper-copy">More colors are available in Themes.</p>
       </div>
     </section>
 
     <!-- THEMES -->
-    <section class="tab-panel" data-tab="themes" hidden>
+    <section class="tab-panel" id="panel-themes" data-tab="themes" role="tabpanel" aria-labelledby="tab-themes" hidden>
+      <div class="page-heading">
+        <p class="eyebrow">MAKE IT YOURS</p>
+        <h2>Color &amp; atmosphere</h2>
+        <p>Set the glow and the look that feels right.</p>
+      </div>
       <div class="card">
-        <h2>Screen-light colors</h2>
-        <p class="muted">White &amp; red free. Extra colors via rewarded stub. Prefer one-time remove-ads over coins.</p>
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">SCREEN LIGHT</p>
+            <h3>Light colors</h3>
+          </div>
+          <span class="section-tag">2 FREE</span>
+        </div>
+        <p class="muted intro-copy">White and red are free. Unlock additional colors with the rewarded stub.</p>
         <div id="color-grid"></div>
         <div class="row-btns">
           <button type="button" class="btn" id="btn-reward-colors">Watch reward → unlock color</button>
         </div>
       </div>
       <div class="card">
-        <h2>App themes</h2>
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">APP APPEARANCE</p>
+            <h3>Choose a theme</h3>
+          </div>
+        </div>
         <div id="theme-list"></div>
       </div>
       <div class="card">
-        <h2>Ads</h2>
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">SUPPORT</p>
+            <h3>Ad-free option</h3>
+          </div>
+        </div>
         <p class="muted" id="ads-status">Banner ads on Settings/Themes only</p>
         <div class="row-btns">
           <button type="button" class="btn primary" id="btn-remove-ads">Remove ads (one-time stub)</button>
@@ -122,9 +182,19 @@
     </section>
 
     <!-- SETTINGS -->
-    <section class="tab-panel" data-tab="settings" hidden>
+    <section class="tab-panel" id="panel-settings" data-tab="settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+      <div class="page-heading">
+        <p class="eyebrow">YOUR PREFERENCES</p>
+        <h2>Make it work for you.</h2>
+        <p>Small controls for a more personal setup.</p>
+      </div>
       <div class="card">
-        <h2>Settings</h2>
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">APP BEHAVIOR</p>
+            <h3>Settings</h3>
+          </div>
+        </div>
         <div class="setting-row">
           <label for="opt-default-on">Turn light on at launch</label>
           <input type="checkbox" id="opt-default-on" />
@@ -136,8 +206,8 @@
             <option value="screen">Screen Light</option>
           </select>
         </div>
-        <div class="setting-row" style="flex-direction:column;align-items:stretch">
-          <label style="display:flex;justify-content:space-between;width:100%">
+        <div class="setting-row range-setting">
+          <label for="opt-strobe-hz">
             <span>Default strobe speed</span>
             <span id="opt-strobe-hz-val">4 Hz</span>
           </label>
@@ -153,8 +223,13 @@
         </div>
       </div>
       <div class="card">
-        <h2>Battery-friendly notes</h2>
-        <ul class="muted" style="margin:0;padding-left:18px;line-height:1.5">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">GOOD TO KNOW</p>
+            <h3>Battery &amp; privacy</h3>
+          </div>
+        </div>
+        <ul class="muted info-list">
           <li>LED torch uses less power than max screen brightness for long sessions.</li>
           <li>Lower strobe Hz and turn off on pause (defaults on) save battery.</li>
           <li>Screen Wake Lock keeps the display on only while light is active.</li>
@@ -165,17 +240,17 @@
         <button type="button" class="btn danger" id="btn-reset-settings">Reset settings</button>
       </div>
       <p class="footer-links">
-        <a href="privacy.html">Privacy</a> · Offline PWA · package <code>com.offerpk.flashlight</code>
+        <a href="privacy.html">Privacy</a> <span aria-hidden="true">·</span> Offline PWA <span aria-hidden="true">·</span> package <code>com.offerpk.flashlight</code>
       </p>
     </section>
   </main>
 
-  <nav class="bottom-nav" role="tablist" aria-label="Main">
-    <button type="button" class="nav-btn active" data-tab="torch" aria-selected="true"><span class="ni">🔦</span>Torch</button>
-    <button type="button" class="nav-btn" data-tab="strobe" aria-selected="false"><span class="ni">⚡</span>Strobe</button>
-    <button type="button" class="nav-btn" data-tab="screen" aria-selected="false"><span class="ni">💡</span>Screen</button>
-    <button type="button" class="nav-btn" data-tab="themes" aria-selected="false"><span class="ni">🎨</span>Themes</button>
-    <button type="button" class="nav-btn" data-tab="settings" aria-selected="false"><span class="ni">⚙️</span>Settings</button>
+  <nav class="bottom-nav" role="tablist" aria-label="Main navigation">
+    <button type="button" class="nav-btn active" id="tab-torch" role="tab" data-tab="torch" aria-controls="panel-torch" aria-selected="true"><span class="ni" aria-hidden="true">🔦</span><span>Torch</span></button>
+    <button type="button" class="nav-btn" id="tab-strobe" role="tab" data-tab="strobe" aria-controls="panel-strobe" aria-selected="false"><span class="ni" aria-hidden="true">⚡</span><span>Strobe</span></button>
+    <button type="button" class="nav-btn" id="tab-screen" role="tab" data-tab="screen" aria-controls="panel-screen" aria-selected="false"><span class="ni" aria-hidden="true">💡</span><span>Screen</span></button>
+    <button type="button" class="nav-btn" id="tab-themes" role="tab" data-tab="themes" aria-controls="panel-themes" aria-selected="false"><span class="ni" aria-hidden="true">🎨</span><span>Themes</span></button>
+    <button type="button" class="nav-btn" id="tab-settings" role="tab" data-tab="settings" aria-controls="panel-settings" aria-selected="false"><span class="ni" aria-hidden="true">⚙️</span><span>Settings</span></button>
   </nav>
 
   <div id="screen-light-overlay" hidden aria-hidden="true" role="button" tabindex="0" aria-label="Screen light on — tap to exit">
@@ -200,7 +275,7 @@
   <div id="ad-banner" hidden>
     <span class="ad-label">Ad stub</span>
   </div>
-  <div id="toast" hidden role="status"></div>
+  <div id="toast" hidden role="status" aria-live="polite"></div>
 
   <script src="js/storage.js"></script>
   <script src="js/ads.js"></script>
